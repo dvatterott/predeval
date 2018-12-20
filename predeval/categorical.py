@@ -67,7 +67,7 @@ class CategoricalEvaluator(ParentPredEval):
         # ---- create list of assertions to test ---- #
         self.possible_assertions_ = {
             'chi2_test': (self.create_chi2_test, self.check_chi2),
-            'cat_exists': (self.create_exist, self.check_exist),
+            'exist': (self.create_exist, self.check_exist),
         }
 
         # ---- create list of assertions to test ---- #
@@ -114,7 +114,7 @@ class CategoricalEvaluator(ParentPredEval):
         _, counts = np.unique(input_data, return_counts=True)
         assert all([x >= 5 for x in counts]), \
             'Not enough data of each type for reliable Chi2 Contingency test. Need at least 5.'
-        self.assertion_params['chi2_test'] = partial(chi2_test, np.array(input_data))
+        self.assertion_params['chi2_test'] = partial(chi2_test, np.array(counts))
 
     def create_exist(self, input_data):
         """Create input data for test checking whether all categorical outputs exist.
@@ -146,15 +146,19 @@ class CategoricalEvaluator(ParentPredEval):
         None
 
         """
-        assert self.assertion_params['chi2_test'], 'Must input or load reference data ks-test'
+        assert self.assertion_params['chi2_test'], 'Must input or load reference data chi2-test'
         test_data = self.ref_data if comparison_data is None else comparison_data
         assert len(test_data.shape) == 1, 'Input data not a single vector'
         _, counts = np.unique(test_data, return_counts=True)
-        test_stat, p_value = self.assertion_params['chi2_test'](counts)  # pylint: disable=E1102
-        assert test_stat <= self.assertion_params['chi2_stat'],\
-            'Distribution different than expected'
+        assert all([x >= 5 for x in counts]), \
+            'Not enough data of each type for reliable Chi2 Contingency test. '\
+            'Need at least 5 values in each cell.'
+        test_stat, p_value, _, _ = self.assertion_params['chi2_test'](counts)  # pylint: disable=E1102
+        passed = True if test_stat <= self.assertion_params['chi2_stat'] else False
+        pass_fail = 'Passed' if passed else 'Failed'
         if self.verbose:
-            print('Passed ks check; test statistic={}, p={}'.format(test_stat, p_value))
+            print('{} chi2 check; test statistic={}, p={}'.format(pass_fail, test_stat, p_value))
+        return ('chi2', passed)
 
     def check_exist(self, comparison_data=None):
         """Check that all distinct values present in test_data.
@@ -172,6 +176,7 @@ class CategoricalEvaluator(ParentPredEval):
         assert self.assertion_params['cat_exists'] is not None,\
             'Must input or load reference minimum'
         test_data = self.ref_data if comparison_data is None else comparison_data
+        assert len(test_data.shape) == 1, 'Input data not a single vector'
         obs = np.unique(np.array(test_data))
         exp = list(self.assertion_params['cat_exists'])
         passed = True if all([x in exp for x in obs]) and all([x in obs for x in exp]) else False

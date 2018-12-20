@@ -11,5 +11,7 @@ __version__ = '0.0.1'
 __license__ = 'MIT'
 
 from .continuous import ContinuousEvaluator
+from .categorical import CategoricalEvaluator
 
-__all__ = ['ContinuousEvaluator']
+__all__ = ['ContinuousEvaluator',
+           'CategoricalEvaluator']

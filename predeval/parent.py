@@ -75,6 +75,7 @@ class ParentPredEval(object):
 
         """
         test_data = self.ref_data if comparison_data is None else comparison_data
+        test_data = np.array(comparison_data) if isinstance(test_data, list) else test_data
         assert len(test_data.shape) == 1, 'Input data not a single vector'
         output = []
         for funs in self.tests:
