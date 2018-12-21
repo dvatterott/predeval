@@ -1,7 +1,0 @@
-=========
-Code docs
-=========
-
-.. toctree::
-
-   placeholder
