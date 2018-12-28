@@ -2,7 +2,7 @@
 from numbers import Real
 from functools import partial
 import numpy as np
-import scipy
+from scipy import stats
 from .parent import ParentPredEval
 
 """
@@ -39,7 +39,7 @@ def chi2_test(reference, test_data):
 
     """
     obs = np.append([reference], [test_data], axis=0)
-    return scipy.stats.chi2_contingency(obs)
+    return stats.chi2_contingency(obs)
 
 
 class CategoricalEvaluator(ParentPredEval):

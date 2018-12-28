@@ -2,7 +2,7 @@
 from numbers import Real
 from functools import partial
 import numpy as np
-import scipy
+from scipy import stats
 from .parent import ParentPredEval
 
 """
@@ -94,7 +94,7 @@ class ContinuousEvaluator(ParentPredEval):
 
         """
         assert len(input_data) >= 25, 'Not enough data for reliable KS tests'
-        self.assertion_params['ks_test'] = partial(scipy.stats.ks_2samp, np.array(input_data))
+        self.assertion_params['ks_test'] = partial(stats.ks_2samp, np.array(input_data))
 
     def find_min(self, input_data):
         """Find min of input_data.
