@@ -2,11 +2,12 @@
 # -*- coding: utf-8 -*-
 
 """Tests for `predeval` package."""
-
+import sys
+import os
 import pytest
 
-
-from predeval import predeval
+sys.path.append(os.path.abspath("../predeval"))
+from predeval import ContinuousEvaluator  # noqa pylint: disable=W0611, C0413
 
 
 @pytest.fixture
