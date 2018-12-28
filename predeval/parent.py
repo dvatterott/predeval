@@ -81,3 +81,21 @@ class ParentPredEval(object):
         for funs in self.tests:
             output.append(funs(comparison_data=test_data))
         return output
+
+    def update_param(self, param_key, param_value):
+        """Update value in assertion param dictionary attribute.
+
+        Parameters
+        ----------
+        param_key : string
+            This is the assertion param that we want to update.
+        param_value : real number or partially evaluated test.
+            This is the updated value.
+
+        Returns
+        -------
+        None
+
+        """
+        assert param_key in self.assertion_params, 'Requested key is not in assertion_params dict'
+        self.assertion_params[param_key] = param_value

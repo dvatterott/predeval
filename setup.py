@@ -6,16 +6,16 @@
 from setuptools import setup, find_packages
 
 with open('README.rst') as readme_file:
-    readme = readme_file.read()
+    README = readme_file.read()
 
 with open('HISTORY.rst') as history_file:
-    history = history_file.read()
+    HISTORY = history_file.read()
 
-requirements = [ ]
+REQUIREMENTS = ['numpy>=1.9', 'scipy>=0.13']
 
-setup_requirements = ['pytest-runner', ]
+SETUP_REQUIREMENTS = ['pytest-runner', ]
 
-test_requirements = ['pytest', ]
+TEST_REQUIREMENTS = ['pytest', ]
 
 setup(
     author="Dan Vatterott",
@@ -23,6 +23,7 @@ setup(
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
+        'Intended Audience :: Science/Research',
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
         "Programming Language :: Python :: 2",
@@ -32,18 +33,20 @@ setup(
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
+        'Topic :: Software Development :: Libraries',
+        'Topic :: Software Development :: Libraries :: Python Modules'
     ],
-    description="Identify bad model outputs at prediction time.",
-    install_requires=requirements,
+    description="Identify changes in model outputs at prediction time.",
+    install_requires=REQUIREMENTS,
     license="MIT license",
-    long_description=readme + '\n\n' + history,
+    long_description=README + '\n\n' + HISTORY,
     include_package_data=True,
     keywords='predeval',
     name='predeval',
     packages=find_packages(include=['predeval']),
-    setup_requires=setup_requirements,
+    setup_requires=SETUP_REQUIREMENTS,
     test_suite='tests',
-    tests_require=test_requirements,
+    tests_require=TEST_REQUIREMENTS,
     url='https://github.com/dvatterott/predeval',
     version='0.0.1',
     zip_safe=False,
