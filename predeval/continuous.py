@@ -175,7 +175,8 @@ class ContinuousEvaluator(ParentPredEval):
 
         Returns
         -------
-        2 item tuple with test name and boolean expressing whether passed test.
+        (string, bool)
+            2 item tuple with test name and boolean expressing whether passed test.
 
         """
         assert self.assertion_params['minimum'] is not None, 'Must input or load reference minimum'
@@ -197,7 +198,8 @@ class ContinuousEvaluator(ParentPredEval):
 
         Returns
         -------
-        2 item tuple with test name and boolean expressing whether passed test.
+        (string, bool)
+            2 item tuple with test name and boolean expressing whether passed test.
 
         """
         assert self.assertion_params['maximum'] is not None, 'Must input or load reference maximum'
@@ -219,7 +221,8 @@ class ContinuousEvaluator(ParentPredEval):
 
         Returns
         -------
-        2 item tuple with test name and boolean expressing whether passed test.
+        (string, bool)
+            2 item tuple with test name and boolean expressing whether passed test.
 
         """
         assert self.assertion_params['mean'] is not None, 'Must input or load reference mean'
@@ -252,7 +255,8 @@ class ContinuousEvaluator(ParentPredEval):
 
         Returns
         -------
-        2 item tuple with test name and boolean expressing whether passed test.
+        (string, bool)
+            2 item tuple with test name and boolean expressing whether passed test.
 
         """
         assert self.assertion_params['std'] is not None, 'Must input or load reference std'
@@ -284,7 +288,8 @@ class ContinuousEvaluator(ParentPredEval):
 
         Returns
         -------
-        2 item tuple with test name and boolean expressing whether passed test.
+        (string, bool)
+            2 item tuple with test name and boolean expressing whether passed test.
 
         """
         assert self.assertion_params['ks_test'], 'Must input or load reference data ks-test'

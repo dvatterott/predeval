@@ -143,7 +143,9 @@ class CategoricalEvaluator(ParentPredEval):
 
         Returns
         -------
-        None
+        (tuple): tuple containing:
+            test_name (str): name of test
+            pass (bool): whether passed test
 
         """
         assert self.assertion_params['chi2_test'], 'Must input or load reference data chi2-test'
@@ -170,8 +172,8 @@ class CategoricalEvaluator(ParentPredEval):
 
         Returns
         -------
-        2 item tuple with test name and boolean expressing whether passed test.
-
+        (string, bool)
+            2 item tuple with test name and boolean expressing whether passed test.
         """
         assert self.assertion_params['cat_exists'] is not None,\
             'Must input or load reference minimum'
