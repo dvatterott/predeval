@@ -12,6 +12,7 @@ Welcome to predeval's documentation!
    contributing
    authors
    history
+   api_reference
 
 Indices and tables
 ==================
