@@ -12,8 +12,6 @@ Welcome to predeval's documentation!
    contributing
    authors
    history
-   continuous
-   categorical
 
 Indices and tables
 ==================

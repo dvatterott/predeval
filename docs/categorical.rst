@@ -1,2 +1,0 @@
-.. automodule:: predeval.categorical
-  :members:
