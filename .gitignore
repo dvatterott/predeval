@@ -1,6 +1,7 @@
 .virtualenvs
 .directory
 .editorconfig
+.coverage
 notes.txt
 environment.yml
 
