@@ -48,7 +48,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'predeval'
-copyright = u"2018, Dan Vatterott"
+copyright = u"2019, Dan Vatterott"
 author = u"Dan Vatterott"
 
 # The version info for the project you're documenting, acts as replacement
@@ -158,6 +158,3 @@ texinfo_documents = [
      'One line description of project.',
      'Miscellaneous'),
 ]
-
-
-
