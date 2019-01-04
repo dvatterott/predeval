@@ -9,6 +9,23 @@ __license__ = 'MIT'
 class ParentPredEval(object):
     """
     Parent Class for evaluator classes.
+
+    ...
+
+    Parameters
+    ----------
+    ref_data : list of int or float or np.array
+        This the reference data for all tests. All future data will be compared to this data.
+    verbose : bool, optional
+        Whether tests should print their output. Default is true
+
+    Attributes
+    ----------
+    verbose : bool
+        Whether or not tests will print output.
+    ref_data : : list of int or float or np.array
+        This the reference data for all tests. All future data will be compared to this data.
+
     """
     __metaclass__ = ABCMeta
 

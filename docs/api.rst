@@ -16,3 +16,10 @@ CategoricalEvaluator
   :members:
   :inherited-members:
   :show-inheritance:
+
+  Utilities
+  ---------
+  .. automodule:: predeval.utilities
+    :members:
+    :inherited-members:
+    :show-inheritance:

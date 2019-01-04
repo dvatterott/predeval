@@ -28,6 +28,14 @@ predeval.parent module
     :inherited-members:
     :show-inheritance:
 
+predeval.utilities module
+----------------------
+
+.. automodule:: predeval.utilities
+    :members:
+    :inherited-members:
+    :show-inheritance:
+
 
 Module contents
 ---------------

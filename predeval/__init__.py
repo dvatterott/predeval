@@ -8,5 +8,8 @@ __version__ = '0.0.1'
 
 from .continuous import ContinuousEvaluator
 from .categorical import CategoricalEvaluator
+from .utilities import evaluate_tests
 
-__all__ = ['ContinuousEvaluator', 'CategoricalEvaluator']
+__all__ = ['ContinuousEvaluator',
+           'CategoricalEvaluator',
+           'evaluate_tests']
