@@ -6,7 +6,7 @@ This page contains a comprehensive list of all classes and functions in predeval
 ContinuousEvaluator
 ---------
 
-.. currentmodule:: predeval.ContinuousEvaluator
+.. currentmodule:: predeval.continuous
 
 .. autosummary::
    ContinuousEvaluator
@@ -14,7 +14,7 @@ ContinuousEvaluator
 CategoricalEvaluator
 ---------
 
-.. currentmodule:: predeval.CategoricalEvaluator
+.. currentmodule:: predeval.categorical
 
 .. autosummary::
    CategoricalEvaluator
@@ -22,8 +22,8 @@ CategoricalEvaluator
 Definitions
 -----------
 
-.. automodule:: predeval.CategoricalEvaluator
+.. automodule:: predeval.continuous
    :members:
 
-.. automodule:: predeval.ContinuousEvaluator
+.. automodule:: predeval.categorical
   :members:

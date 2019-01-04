@@ -10,10 +10,8 @@ This software is built to identify unexpected changes in a model output before e
    readme
    installation
    usage
-   modules
    api
    contributing
-   authors
    history
 
 Indices and tables
