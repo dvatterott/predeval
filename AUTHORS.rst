@@ -5,7 +5,7 @@ Credits
 Development Lead
 ----------------
 
-* Dan Vatterott <dvatterott@gmail.com>
+* [Dan Vatterott](www.danvatterott.com) <dvatterott@gmail.com>
 
 Contributors
 ------------

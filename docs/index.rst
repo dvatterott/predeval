@@ -12,6 +12,7 @@ This software is built to identify unexpected changes in a model output before e
    usage
    api
    contributing
+   authors
    history
 
 Indices and tables
