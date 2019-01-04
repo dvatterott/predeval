@@ -40,40 +40,6 @@ class ContinuousEvaluator(ParentPredEval):
     assertions : list of str
         This list of strings describes the tests that will be run on comparison data.
 
-
-    Methods
-    -------
-    'min': (self.update_min, self.check_min),
-    'max': (self.update_max, self.check_max),
-    'mean': (self.update_mean, self.check_mean),
-    'std': (self.update_std, self.check_std),
-    'ks_test': (self.update_ks_test, self.check_ks),
-
-    update_ks_test(input_data)
-        Load ks_test with input_data.
-    update_min(input_data)
-        Updated expected min value.
-    update_max(input_data)
-        Updated expected max value.
-    update_mean(input_data)
-        Updated expected mean.
-    update_std(input_data)
-        Updated expected standard deviation.
-    check_ks(test_data)
-        Test whether continuous data distributed as expected.
-    check_min(test_data)
-        Test whether max value is lower than expected max.
-    check_max(test_data)
-        Test whether min value is lower than expected min.
-    check_mean(test_data)
-        Test whether mean is different than expected.
-    check_std(test_data)
-        Test whether standard deviation is different than expected.
-    check_data(test_data)
-        Run all tests declared in assertions on test_data.
-    update_param(param_key, param_value)
-        Update values in assertion_params (e.g., chi_test statistic)
-
     """
     def __init__(
             self,

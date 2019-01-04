@@ -66,22 +66,6 @@ class CategoricalEvaluator(ParentPredEval):
     assertions : list of str
         This list of strings describes the tests that will be run on comparison data.
 
-
-    Methods
-    -------
-    update_chi2_test(input_data)
-        Load chi2_test with input_data.
-    update_exist(input_data)
-        Update what expected categories are.
-    check_chi2(test_data)
-        Test whether categorical data distributed across categories as expected.
-    check_exist(test_data)
-        Test whether all categories exist.
-    check_data(test_data)
-        Run all tests declared in assertions on test_data.
-    update_param(param_key, param_value)
-        Update values in assertion_params (e.g., chi_test statistic)
-
     """
     def __init__(
             self,
