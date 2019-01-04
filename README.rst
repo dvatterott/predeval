@@ -20,7 +20,7 @@ predeval
 
 
 
-Identify bad model outputs at prediction time.
+Identify unexpected changes in model outputs before evaluation data becomes available.
 
 
 * Free software: MIT license
