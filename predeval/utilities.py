@@ -1,4 +1,4 @@
-"""Library of classes for evaluating continuous model outputs."""
+"""Helper functions for the predeval module."""
 
 __author__ = 'Dan Vatterott'
 __license__ = 'MIT'
