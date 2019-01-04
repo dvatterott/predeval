@@ -16,14 +16,14 @@ __author__ = 'Dan Vatterott'
 __license__ = 'MIT'
 
 
-def chi2_test(reference, test_data):
+def _chi2_test(reference, test_data):
     """Change chi2_contingency inputs for partial evaluation.
 
     Parameters
     ----------
-    reference : list (ideally one-dimensional np.array)
+    reference : list or np.array
         This the reference data that will be used for the comparison.
-    test_data : list (ideally one-dimensional np.array)
+    test_data : list or np.array
         This the data compared to the reference data.
 
     Returns
@@ -45,6 +45,43 @@ def chi2_test(reference, test_data):
 class CategoricalEvaluator(ParentPredEval):
     """
     Evaluator for categorical model outputs (e.g., classification models).
+
+    ...
+
+    Parameters
+    ----------
+    ref_data : list of int or float or np.array
+        This the reference data for all tests. All future data will be compared to this data.
+    assertions : list of str, optional
+        These are the assertion tests that will be created. Defaults is ['chi2_test', 'exist'].
+    verbose : bool, optional
+        Whether tests should print their output. Default is true
+
+    Attributes
+    ----------
+    assertion_params : dict
+        dictionary of test names and values defining these tests
+        (e.g., test-statistic for chi2_test).
+        Default value for chi2_test is 0.2.
+    assertions : list of str
+        This list of strings describes the tests that will be run on comparison data.
+
+
+    Methods
+    -------
+    update_chi2_test(input_data)
+        Load chi2_test with input_data.
+    update_exist(input_data)
+        Update what expected categories are.
+    check_chi2(test_data)
+        Test whether categorical data distributed across categories as expected.
+    check_exist(test_data)
+        Test whether all categories exist.
+    check_data(test_data)
+        Run all tests declared in assertions on test_data.
+    update_param(param_key, param_value)
+        Update values in assertion_params (e.g., chi_test statistic)
+
     """
     def __init__(
             self,
@@ -65,44 +102,44 @@ class CategoricalEvaluator(ParentPredEval):
         self.assertion_params_['chi2_stat'] = kwargs.get('chi2_stat', 0.2)
 
         # ---- create list of assertions to test ---- #
-        self.possible_assertions_ = {
-            'chi2_test': (self.create_chi2_test, self.check_chi2),
-            'exist': (self.create_exist, self.check_exist),
+        self._possible_assertions_ = {
+            'chi2_test': (self.update_chi2_test, self.check_chi2),
+            'exist': (self.update_exist, self.check_exist),
         }
 
         # ---- create list of assertions to test ---- #
         assertions = ['chi2_test', 'exist'] if assertions is None else assertions
-        self.assertions_ = self.check_assertion_types(assertions)
+        self.assertions_ = self._check_assertion_types(assertions)
 
         # ---- populate assertion tests with reference data ---- #
         for i in self.assertions_:
-            self.possible_assertions[i][0](self.ref_data)
+            self._possible_assertions[i][0](self.ref_data)
 
         # ---- populate list of tests to run and run tests ---- #
-        self.tests_ = [self.possible_assertions_[i][1] for i in self.assertions_]
+        self._tests_ = [self._possible_assertions_[i][1] for i in self.assertions_]
 
     @property
     def assertion_params(self):
         return self.assertion_params_
 
     @property
-    def possible_assertions(self):
-        return self.possible_assertions_
+    def _possible_assertions(self):
+        return self._possible_assertions_
 
     @property
     def assertions(self):
         return self.assertions_
 
     @property
-    def tests(self):
-        return self.tests_
+    def _tests(self):
+        return self._tests_
 
-    def create_chi2_test(self, input_data):
+    def update_chi2_test(self, input_data):
         """Create partially evaluated chi2 contingency test.
 
         Parameters
         ----------
-        input_data : list (ideally one-dimensional np.array)
+        input_data : list or np.array
             This the reference data for the ks-test. All future data will be compared to this data.
 
         Returns
@@ -114,14 +151,14 @@ class CategoricalEvaluator(ParentPredEval):
         _, counts = np.unique(input_data, return_counts=True)
         assert all([x >= 5 for x in counts]), \
             'Not enough data of each type for reliable Chi2 Contingency test. Need at least 5.'
-        self.assertion_params['chi2_test'] = partial(chi2_test, np.array(counts))
+        self.assertion_params['chi2_test'] = partial(_chi2_test, np.array(counts))
 
-    def create_exist(self, input_data):
+    def update_exist(self, input_data):
         """Create input data for test checking whether all categorical outputs exist.
 
         Parameters
         ----------
-        input_data : list (ideally one-dimensional np.array)
+        input_data : list or np.array
             This the reference data for the check_exist. All future data will be compared to it.
 
         Returns
@@ -133,12 +170,15 @@ class CategoricalEvaluator(ParentPredEval):
             assert len(input_data.shape) == 1, 'Input data not a single vector'
             self.assertion_params['cat_exists'] = np.unique(input_data)
 
-    def check_chi2(self, comparison_data=None):
+    def check_chi2(self, test_data):
         """Test whether test_data is similar to reference data.
+
+        If chi2-test-statistic exceeds the value in assertion_params,
+        then the test will produce a False (rather than True).
 
         Parameters
         ----------
-        comparison_data : list (ideally one-dimensional np.array)
+        test_data : list or np.array
             This the data that will be compared to the reference data.
 
         Returns
@@ -148,7 +188,6 @@ class CategoricalEvaluator(ParentPredEval):
 
         """
         assert self.assertion_params['chi2_test'], 'Must input or load reference data chi2-test'
-        test_data = self.ref_data if comparison_data is None else comparison_data
         assert len(test_data.shape) == 1, 'Input data not a single vector'
         _, counts = np.unique(test_data, return_counts=True)
         assert all([x >= 5 for x in counts]), \
@@ -161,12 +200,14 @@ class CategoricalEvaluator(ParentPredEval):
             print('{} chi2 check; test statistic={}, p={}'.format(pass_fail, test_stat, p_value))
         return ('chi2', passed)
 
-    def check_exist(self, comparison_data=None):
+    def check_exist(self, test_data):
         """Check that all distinct values present in test_data.
+
+        If any values missing, then the function will return a False (rather than true).
 
         Parameters
         ----------
-        comparison_data : list (ideally one-dimensional np.array)
+        test_data : list or np.array
             This the data that will be compared to the reference data.
 
         Returns
@@ -176,7 +217,6 @@ class CategoricalEvaluator(ParentPredEval):
         """
         assert self.assertion_params['cat_exists'] is not None,\
             'Must input or load reference minimum'
-        test_data = self.ref_data if comparison_data is None else comparison_data
         assert len(test_data.shape) == 1, 'Input data not a single vector'
         obs = np.unique(np.array(test_data))
         exp = list(self.assertion_params['cat_exists'])

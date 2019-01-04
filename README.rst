@@ -27,11 +27,6 @@ This software is built to identify unexpected changes in a model output before e
 * Documentation: https://predeval.readthedocs.io.
 
 
-Features
---------
-
-* TODO
-
 Credits
 -------
 

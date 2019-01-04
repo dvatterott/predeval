@@ -9,7 +9,7 @@ predeval.categorical module
 
 .. automodule:: predeval.categorical
     :members:
-    :undoc-members:
+    :inherited-members:
     :show-inheritance:
 
 predeval.continuous module
@@ -17,7 +17,7 @@ predeval.continuous module
 
 .. automodule:: predeval.continuous
     :members:
-    :undoc-members:
+    :inherited-members:
     :show-inheritance:
 
 predeval.parent module
@@ -25,7 +25,7 @@ predeval.parent module
 
 .. automodule:: predeval.parent
     :members:
-    :undoc-members:
+    :inherited-members:
     :show-inheritance:
 
 
@@ -34,5 +34,5 @@ Module contents
 
 .. automodule:: predeval
     :members:
-    :undoc-members:
+    :inherited-members:
     :show-inheritance:

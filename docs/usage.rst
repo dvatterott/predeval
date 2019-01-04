@@ -1,5 +1,5 @@
 =====
-Usage
+Examples
 =====
 
 To use predeval in a project::
