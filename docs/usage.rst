@@ -110,21 +110,13 @@ Example of changing the minimum expected value to 0. I demonstrate the three dif
     ce = ContinuousEvaluator(model_output)
     ce.update_param('minimum', 0)
 
-    or
+    # or
 
     ce.assertion_params['minimum'] = 0
 
-    or
+    # or
 
     ce.update_min([0])
-
-Example of changing the maximum expected value to 100.
-
-.. code-block:: python3
-
-    from predeval import ContinuousEvaluator
-    ce = ContinuousEvaluator(model_output)
-    ce.update_param('maximum', 100)
 
 Example of changing the maximum expected value to 100.
 
@@ -175,7 +167,7 @@ Example of changing expected categories to 1, 2, and 3.
     ce.update_param('cat_exists', [1, 2, 3])
 
 
-Changing what tests are run
+Changing evaluation tests
 ========
 
 You might not want to run the entire test suite. Here's some examples of how to change what tests are run.
@@ -185,7 +177,7 @@ You might not want to run the entire test suite. Here's some examples of how to 
     from predeval import ContinuousEvaluator
     ce = ContinuousEvaluator(model_output, assertions=['min', 'max'])
 
-    or you can run the tests one at a time.
+    # or you can run the tests one at a time.
 
     ce.check_min(new_model_output)
     ce.check_max(new_model_output)

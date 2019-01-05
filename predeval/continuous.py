@@ -41,6 +41,7 @@ class ContinuousEvaluator(ParentPredEval):
     ----------
     assertion_params : dict
         dictionary of test names and values defining these tests.
+
         * minimum : float
             Expected minimum.
         * maximum : float
@@ -120,7 +121,7 @@ class ContinuousEvaluator(ParentPredEval):
         """Create partially evaluated ks_test.
 
         Uses `Kolmogorov-Smirnov test from scipy
-        <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.kstest.html>`_
+        <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.kstest.html>`_.
 
         Parameters
         ----------
@@ -345,7 +346,7 @@ class ContinuousEvaluator(ParentPredEval):
         The threshold is set by assertion_params['ks_test']
 
         Uses `Kolmogorov-Smirnov test from scipy
-        <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.kstest.html>`_
+        <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.kstest.html>`_.
 
         Parameters
         ----------

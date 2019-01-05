@@ -20,7 +20,7 @@ def _chi2_test(reference, test_data):
     """Change chi2_contingency inputs for partial evaluation.
 
     Uses `chi2_contingency test from scipy
-    <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.chi2_contingency.html>`_
+    <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.chi2_contingency.html>`_.
 
     Parameters
     ----------
@@ -70,6 +70,7 @@ class CategoricalEvaluator(ParentPredEval):
     ----------
     assertion_params : dict
         dictionary of test names and values defining these tests.
+
         * chi2_test : float
             Chi2-test-statistic. When this value is exceeded. The test 'failed'.
         * cat_exists : list of int or str
@@ -134,7 +135,7 @@ class CategoricalEvaluator(ParentPredEval):
         """Create partially evaluated chi2 contingency test.
 
         Uses `chi2_contingency test from scipy
-        <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.chi2_contingency.html>`_
+        <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.chi2_contingency.html>`_.
 
         Parameters
         ----------
@@ -179,7 +180,7 @@ class CategoricalEvaluator(ParentPredEval):
         The threshold is set by assertion_params['chi2_test']
 
         Uses `chi2_contingency test from scipy
-        <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.chi2_contingency.html>`_
+        <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.chi2_contingency.html>`_.
 
         Parameters
         ----------
