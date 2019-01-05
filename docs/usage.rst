@@ -33,6 +33,8 @@ Example of using the ContinuousEvaluator
     Passed std check; std observed=29.579104190514 (Expected 29.46919171044287 +- 14.734595855221436)
     Passed ks check; test statistic=0.051000000000000045, p=0.14408243524623565
 
+Print test outcomes.
+
 .. code-block:: python3
 
     # print test outputs. note we will not generate assertion errors on failure.
@@ -47,6 +49,8 @@ Example of using the ContinuousEvaluator
     Passed std test.
     Passed ks test.
 
+Try ContinuousEvaluator with manipulated data.
+
 .. code-block:: python3
 
     changed_model_output = uniform(0, 100, size=(1000,)) + 20
@@ -59,6 +63,8 @@ Example of using the ContinuousEvaluator
     Passed mean check; mean observed=70.78355620677603 (Expected 50.8804672605415 +- 58.93838342088574)
     Passed std check; std observed=28.94443741932546 (Expected 29.46919171044287 +- 14.734595855221436)
     Failed ks check; test statistic=0.21699999999999997, p=4.182182152969388e-21
+
+Print test outcomes.
 
 .. code-block:: python3
 
@@ -98,7 +104,9 @@ Example of using the CategoricalEvaluator
     Passed chi2 check; test statistic=0.7317191804740675, p=0.6936001826101796
     Passed min check; observed=[0 1 2] (Expected [0, 1, 2])
 
-.. code:: ipython3
+Print test outcomes.
+
+.. code-block:: python3
 
     # print test outputs. note we will not generate assertion errors on failure.
     from predeval import evaluate_tests
@@ -109,7 +117,9 @@ Example of using the CategoricalEvaluator
     Passed chi2 test.
     Passed exist test.
 
-.. code:: ipython3
+Try CategoricalEvaluator with manipulated data.
+
+.. code-block:: python3
 
     changed_model_output = choice([0, 1, 2], size=(1000,))
     changed_model_output[:200] = 0
@@ -120,7 +130,9 @@ Example of using the CategoricalEvaluator
     Failed chi2 check; test statistic=59.06552162818124, p=1.493086411779028e-13
     Passed min check; observed=[0 1 2] (Expected [0, 1, 2])
 
-.. code:: ipython3
+Print test outcomes.
+
+.. code-block:: python3
 
     evaluate_tests(changed_test_results, assert_test=False)
 
