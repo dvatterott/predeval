@@ -177,7 +177,7 @@ class CategoricalEvaluator(ParentPredEval):
         If the returned chi2-test-statistic is greater than the threshold (default 2),
         the test failed.
 
-        The threshold is set by assertion_params['chi2_test']
+        The threshold is set by assertion_params['chi2_test'].
 
         Uses `chi2_contingency test from scipy
         <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.chi2_contingency.html>`_.
@@ -215,7 +215,7 @@ class CategoricalEvaluator(ParentPredEval):
 
         If any values missing, then the function will return a False (rather than true).
 
-        The expected values is controlled by assertion_params['cat_exists']
+        The expected values is controlled by assertion_params['cat_exists'].
 
         Parameters
         ----------

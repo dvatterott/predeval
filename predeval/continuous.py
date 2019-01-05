@@ -208,7 +208,7 @@ class ContinuousEvaluator(ParentPredEval):
     def check_min(self, test_data):
         """Check whether test_data has any smaller values than expected.
 
-        The expected min is controlled by assertion_params['min']
+        The expected min is controlled by assertion_params['min'].
 
         Parameters
         ----------
@@ -234,7 +234,7 @@ class ContinuousEvaluator(ParentPredEval):
     def check_max(self, test_data):
         """Check whether test_data has any larger values than expected.
 
-        The expected max is controlled by assertion_params['max']
+        The expected max is controlled by assertion_params['max'].
 
         Parameters
         ----------
@@ -263,8 +263,9 @@ class ContinuousEvaluator(ParentPredEval):
         If the observed mean is more than 2 standard deviations from the expected mean,
         the test fails.
 
-        The expected mean is controlled by assertion_params['mean']
-        The expected standard deviation is controlled by assertion_params['std']
+        The expected mean is controlled by assertion_params['mean'].
+
+        The expected standard deviation is controlled by assertion_params['std'].
 
         Parameters
         ----------
@@ -304,7 +305,7 @@ class ContinuousEvaluator(ParentPredEval):
         If the observed standard deviation is less than 1/2 the expected std or
         greater than 1.5 times the expected std, then the test fails.
 
-        The expected standard deviation is controlled by assertion_params['std']
+        The expected standard deviation is controlled by assertion_params['std'].
 
         Parameters
         ----------
@@ -343,7 +344,7 @@ class ContinuousEvaluator(ParentPredEval):
         If the returned ks-test-statistic is greater than the threshold (default 0.2),
         the test failed.
 
-        The threshold is set by assertion_params['ks_test']
+        The threshold is set by assertion_params['ks_test'].
 
         Uses `Kolmogorov-Smirnov test from scipy
         <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.kstest.html>`_.
