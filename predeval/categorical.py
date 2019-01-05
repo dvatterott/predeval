@@ -5,13 +5,6 @@ import numpy as np
 from scipy import stats
 from .parent import ParentPredEval
 
-"""
-https://scikit-learn.org/stable/modules/model_persistence.html
-from joblib import dump, load
-dump(clf, 'filename.joblib')
-clf = load('filename.joblib')
-"""
-
 __author__ = 'Dan Vatterott'
 __license__ = 'MIT'
 
@@ -71,8 +64,10 @@ class CategoricalEvaluator(ParentPredEval):
     assertion_params : dict
         dictionary of test names and values defining these tests.
 
-        * chi2_test : float
+        * chi2_stat : float
             Chi2-test-statistic. When this value is exceeded. The test 'failed'.
+        * chi2_test : func
+            Partially evaluated chi2 test.
         * cat_exists : list of int or str
             This is a list of the expected model outputs
     assertions : list of str
@@ -208,7 +203,7 @@ class CategoricalEvaluator(ParentPredEval):
                 pass_fail,
                 float(test_stat),
                 float(p_value)))
-            return ('chi2', passed)
+        return ('chi2', passed)
 
     def check_exist(self, test_data):
         """Check that all distinct values present in test_data.
@@ -237,4 +232,4 @@ class CategoricalEvaluator(ParentPredEval):
         pass_fail = 'Passed' if passed else 'Failed'
         if self.verbose:
             print('{0} min check; observed={1} (Expected {2})'.format(pass_fail, obs, exp))
-            return ('exist', passed)
+        return ('exist', passed)

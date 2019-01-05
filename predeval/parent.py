@@ -5,7 +5,6 @@ import numpy as np
 __author__ = 'Dan Vatterott'
 __license__ = 'MIT'
 
-
 class ParentPredEval(object):
     """
     Parent Class for evaluator classes.

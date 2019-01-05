@@ -5,13 +5,6 @@ import numpy as np
 from scipy import stats
 from .parent import ParentPredEval
 
-"""
-https://scikit-learn.org/stable/modules/model_persistence.html
-from joblib import dump, load
-dump(clf, 'filename.joblib')
-clf = load('filename.joblib')
-"""
-
 __author__ = 'Dan Vatterott'
 __license__ = 'MIT'
 
@@ -50,8 +43,10 @@ class ContinuousEvaluator(ParentPredEval):
             Expected mean.
         * std : float
             Expected standard-deviation.
-        * ks_test: float
+        * ks_stat: float
             ks-test-statistic. When this value is exceeded. The test 'failed'.
+        * ks_test : func
+            Partially evaluated ks test.
     assertions : list of str
         This list of strings describes the tests that will be run on comparison data.
         Defaults to ['min', 'max', 'mean', 'std', 'ks_test']
@@ -372,4 +367,4 @@ class ContinuousEvaluator(ParentPredEval):
                 pass_fail,
                 float(test_stat),
                 float(p_value)))
-            return ('ks', passed)
+        return ('ks', passed)

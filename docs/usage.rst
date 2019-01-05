@@ -148,15 +148,15 @@ Example of changing Kolmogorov-Smirnov test threshold to 1.
 
     from predeval import ContinuousEvaluator
     ce = ContinuousEvaluator(model_output)
-    ce.update_param('ks_test', 1)
+    ce.update_param('ks_stat', 1)
 
-Example of changing Chi-square test of independence threshold to 1.
+Example of changing Chi-square test of independence threshold to 3.
 
 .. code-block:: python3
 
     from predeval import CategoricalEvaluator
     ce = CategoricalEvaluator(model_output)
-    ce.update_param('chi2_test', 1)
+    ce.update_param('chi2_stat', 3)
 
 Example of changing expected categories to 1, 2, and 3.
 
@@ -181,3 +181,17 @@ You might not want to run the entire test suite. Here's some examples of how to 
 
     ce.check_min(new_model_output)
     ce.check_max(new_model_output)
+
+Saving and Loading your evaluator
+========
+
+Here's an example of how to save and load your evaluator.
+
+.. code-block:: python3
+
+    from predeval import ContinuousEvaluator
+    ce = ContinuousEvaluator(model_output)
+
+    from joblib import dump, load
+    dump(ce, 'con_eval.joblib')
+    ce = load('con_eval.joblib')
