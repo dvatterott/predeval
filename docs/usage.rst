@@ -4,7 +4,7 @@ Examples
 
 Example of using the ContinuousEvaluator
 
-.. code:: ipython3
+.. code-block:: python3
 
     from predeval import ContinuousEvaluator
 
@@ -33,7 +33,7 @@ Example of using the ContinuousEvaluator
     Passed std check; std observed=29.579104190514 (Expected 29.46919171044287 +- 14.734595855221436)
     Passed ks check; test statistic=0.051000000000000045, p=0.14408243524623565
 
-.. code:: ipython3
+.. code-block:: python3
 
     # print test outputs. note we will not generate assertion errors on failure.
     from predeval import evaluate_tests
@@ -47,7 +47,7 @@ Example of using the ContinuousEvaluator
     Passed std test.
     Passed ks test.
 
-.. code:: ipython3
+.. code-block:: python3
 
     changed_model_output = uniform(0, 100, size=(1000,)) + 20
     changed_test_results = ce.check_data(changed_model_output)
@@ -60,7 +60,7 @@ Example of using the ContinuousEvaluator
     Passed std check; std observed=28.94443741932546 (Expected 29.46919171044287 +- 14.734595855221436)
     Failed ks check; test statistic=0.21699999999999997, p=4.182182152969388e-21
 
-.. code:: ipython3
+.. code-block:: python3
 
     evaluate_tests(changed_test_results, assert_test=False)
 
@@ -74,7 +74,7 @@ Example of using the ContinuousEvaluator
 
 Example of using the CategoricalEvaluator
 
-.. code:: ipython3
+.. code-block:: python3
 
     from predeval import CategoricalEvaluator
 
