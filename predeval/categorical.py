@@ -181,8 +181,11 @@ class CategoricalEvaluator(ParentPredEval):
         passed = True if test_stat <= self.assertion_params['chi2_stat'] else False
         pass_fail = 'Passed' if passed else 'Failed'
         if self.verbose:
-            print('{} chi2 check; test statistic={}, p={}'.format(pass_fail, test_stat, p_value))
-        return ('chi2', passed)
+            print('{0} chi2 check; test statistic={1:.4f}, p={2:.4f}'.format(
+                pass_fail,
+                float(test_stat),
+                float(p_value)))
+            return ('chi2', passed)
 
     def check_exist(self, test_data):
         """Check that all distinct values present in test_data.
@@ -207,5 +210,5 @@ class CategoricalEvaluator(ParentPredEval):
         passed = True if all([x in exp for x in obs]) and all([x in obs for x in exp]) else False
         pass_fail = 'Passed' if passed else 'Failed'
         if self.verbose:
-            print('{} min check; observed={} (Expected {})'.format(pass_fail, obs, exp))
-        return ('exist', passed)
+            print('{0} min check; observed={1} (Expected {2})'.format(pass_fail, obs, exp))
+            return ('exist', passed)

@@ -206,7 +206,7 @@ class ContinuousEvaluator(ParentPredEval):
         passed = True if min_obs >= self.assertion_params['minimum'] else False
         pass_fail = 'Passed' if passed else 'Failed'
         if self.verbose:
-            print('{} min check; min observed={}'.format(pass_fail, min_obs))
+            print('{0} min check; min observed={1:.4f}'.format(pass_fail, min_obs))
         return ('min', passed)
 
     def check_max(self, test_data):
@@ -229,7 +229,7 @@ class ContinuousEvaluator(ParentPredEval):
         passed = True if max_obs <= self.assertion_params['maximum'] else False
         pass_fail = 'Passed' if passed else 'Failed'
         if self.verbose:
-            print('{} max check; max observed={}'.format(pass_fail, max_obs))
+            print('{0} max check; max observed={1:.4f}'.format(pass_fail, max_obs))
         return ('max', passed)
 
     def check_mean(self, test_data):
@@ -259,7 +259,7 @@ class ContinuousEvaluator(ParentPredEval):
 
         pass_fail = 'Passed' if all(passed) else 'Failed'
         if self.verbose:
-            print('{} mean check; mean observed={} (Expected {} +- {})'.format(
+            print('{0} mean check; mean observed={1:.4f} (Expected {2:.4f} +- {3:.4f})'.format(
                 pass_fail,
                 mean_obs,
                 self.assertion_params['mean'],
@@ -292,7 +292,7 @@ class ContinuousEvaluator(ParentPredEval):
 
         pass_fail = 'Passed' if all(passed) else 'Failed'
         if self.verbose:
-            print('{} std check; std observed={} (Expected {} +- {})'.format(
+            print('{0} std check; std observed={1:.4f} (Expected {2:.4f} +- {3:.4f})'.format(
                 pass_fail,
                 std_obs,
                 self.assertion_params['std'],
@@ -320,5 +320,8 @@ class ContinuousEvaluator(ParentPredEval):
         passed = True if test_stat <= self.assertion_params['ks_stat'] else False
         pass_fail = 'Passed' if passed else 'Failed'
         if self.verbose:
-            print('{} ks check; test statistic={}, p={}'.format(pass_fail, test_stat, p_value))
-        return ('ks', passed)
+            print('{0} ks check; test statistic={1:.4f}, p={2:.4f}'.format(
+                pass_fail,
+                float(test_stat),
+                float(p_value)))
+            return ('ks', passed)
