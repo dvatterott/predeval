@@ -2,6 +2,9 @@
 Examples
 =====
 
+ContinuousEvaluator
+========
+
 Example of using the ContinuousEvaluator
 
 .. code-block:: python3
@@ -77,6 +80,9 @@ Print test outcomes.
     Passed mean test.
     Passed std test.
     Failed ks test.
+
+CategoricalEvaluator
+========
 
 Example of using the CategoricalEvaluator
 
