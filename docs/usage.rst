@@ -4,8 +4,6 @@ Examples
 
 Example of using the ContinuousEvaluator::
 
-.. code:: ipython3
-
     from predeval import ContinuousEvaluator
 
     # create continuous sample.
@@ -73,8 +71,6 @@ Example of using the ContinuousEvaluator::
     Failed ks test.
 
 Example of using the CategoricalEvaluator::
-
-.. code:: ipython3
 
     from predeval import CategoricalEvaluator
 
