@@ -76,14 +76,14 @@ class CategoricalEvaluator(ParentPredEval):
         super(CategoricalEvaluator, self).__init__(ref_data, verbose=verbose)
 
         # ---- Fill in Assertion Parameters ---- #
-        self.assertion_params_ = {
+        self._assertion_params_ = {
             'chi2_test': None,
             'cat_exists': None,
         }
 
-        assert isinstance(kwargs.get('chi2_stat', 0.2),
+        assert isinstance(kwargs.get('chi2_stat', 2),
                           Real), 'expected number, input chi2_test_stat is not a number'
-        self.assertion_params_['chi2_stat'] = kwargs.get('chi2_stat', 0.2)
+        self._assertion_params_['chi2_stat'] = kwargs.get('chi2_stat', 2)
 
         # ---- create list of assertions to test ---- #
         self._possible_assertions_ = {
@@ -93,18 +93,18 @@ class CategoricalEvaluator(ParentPredEval):
 
         # ---- create list of assertions to test ---- #
         assertions = ['chi2_test', 'exist'] if assertions is None else assertions
-        self.assertions_ = self._check_assertion_types(assertions)
+        self._assertions_ = self._check_assertion_types(assertions)
 
         # ---- populate assertion tests with reference data ---- #
-        for i in self.assertions_:
+        for i in self._assertions_:
             self._possible_assertions[i][0](self.ref_data)
 
         # ---- populate list of tests to run and run tests ---- #
-        self._tests_ = [self._possible_assertions_[i][1] for i in self.assertions_]
+        self._tests_ = [self._possible_assertions_[i][1] for i in self._assertions_]
 
     @property
     def assertion_params(self):
-        return self.assertion_params_
+        return self._assertion_params_
 
     @property
     def _possible_assertions(self):
@@ -112,7 +112,7 @@ class CategoricalEvaluator(ParentPredEval):
 
     @property
     def assertions(self):
-        return self.assertions_
+        return self._assertions_
 
     @property
     def _tests(self):

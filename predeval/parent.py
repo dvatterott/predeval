@@ -95,7 +95,7 @@ class ParentPredEval(object):
         assert len(test_data.shape) == 1, 'Input data not a single vector'
         output = []
         for funs in self._tests:
-            output.append(funs(comparison_data=test_data))
+            output.append(funs(test_data))
         return output
 
     def update_param(self, param_key, param_value):
