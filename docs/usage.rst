@@ -98,3 +98,94 @@ Example of using the CategoricalEvaluator
     evaluate_tests(changed_test_results, assert_test=False)
     # Failed chi2 test.
     # Passed exist test.
+
+Updating test parameters
+========
+
+Example of changing the minimum expected value to 0. I demonstrate the three different ways this can be done.
+
+.. code-block:: python3
+
+    from predeval import ContinuousEvaluator
+    ce = ContinuousEvaluator(model_output)
+    ce.update_param('minimum', 0)
+
+    or
+
+    ce.assertion_params['minimum'] = 0
+
+    or
+
+    ce.update_min([0])
+
+Example of changing the maximum expected value to 100.
+
+.. code-block:: python3
+
+    from predeval import ContinuousEvaluator
+    ce = ContinuousEvaluator(model_output)
+    ce.update_param('maximum', 100)
+
+Example of changing the maximum expected value to 100.
+
+.. code-block:: python3
+
+    from predeval import ContinuousEvaluator
+    ce = ContinuousEvaluator(model_output)
+    ce.update_param('maximum', 100)
+
+Example of changing the expected mean to 50.
+
+.. code-block:: python3
+
+    from predeval import ContinuousEvaluator
+    ce = ContinuousEvaluator(model_output)
+    ce.update_param('mean', 50)
+
+Example of changing expected standard-deviation to 10.
+
+.. code-block:: python3
+
+    from predeval import ContinuousEvaluator
+    ce = ContinuousEvaluator(model_output)
+    ce.update_param('std', 10)
+
+Example of changing Kolmogorov-Smirnov test threshold to 1.
+
+.. code-block:: python3
+
+    from predeval import ContinuousEvaluator
+    ce = ContinuousEvaluator(model_output)
+    ce.update_param('ks_test', 1)
+
+Example of changing Chi-square test of independence threshold to 1.
+
+.. code-block:: python3
+
+    from predeval import CategoricalEvaluator
+    ce = CategoricalEvaluator(model_output)
+    ce.update_param('chi2_test', 1)
+
+Example of changing expected categories to 1, 2, and 3.
+
+.. code-block:: python3
+
+    from predeval import CategoricalEvaluator
+    ce = CategoricalEvaluator(model_output)
+    ce.update_param('cat_exists', [1, 2, 3])
+
+
+Changing what tests are run
+========
+
+You might not want to run the entire test suite. Here's some examples of how to change what tests are run.
+
+.. code-block:: python3
+
+    from predeval import ContinuousEvaluator
+    ce = ContinuousEvaluator(model_output, assertions=['min', 'max'])
+
+    or you can run the tests one at a time.
+
+    ce.check_min(new_model_output)
+    ce.check_max(new_model_output)

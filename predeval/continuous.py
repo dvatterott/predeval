@@ -20,6 +20,12 @@ class ContinuousEvaluator(ParentPredEval):
     """
     Evaluator for continuous model outputs (e.g., regression models).
 
+    By default, this will run the tests listed in the assertions
+    attribute (['min', 'max', 'mean', 'std', 'ks_test']).
+    You can change the tests that will run by listing the desired tests in the assertions parameter.
+
+    The available tests are min, max, mean, std, and ks_test.
+
     ...
 
     Parameters
@@ -34,11 +40,20 @@ class ContinuousEvaluator(ParentPredEval):
     Attributes
     ----------
     assertion_params : dict
-        dictionary of test names and values defining these tests
-        (e.g., test-statistic for chi2_test).
-        Default value for chi2_test is 0.2.
+        dictionary of test names and values defining these tests.
+        * minimum : float
+            Expected minimum.
+        * maximum : float
+            Expected maximum.
+        * mean : float
+            Expected mean.
+        * std : float
+            Expected standard-deviation.
+        * ks_test: float
+            ks-test-statistic. When this value is exceeded. The test 'failed'.
     assertions : list of str
         This list of strings describes the tests that will be run on comparison data.
+        Defaults to ['min', 'max', 'mean', 'std', 'ks_test']
 
     """
     def __init__(
@@ -104,6 +119,9 @@ class ContinuousEvaluator(ParentPredEval):
     def update_ks_test(self, input_data):
         """Create partially evaluated ks_test.
 
+        Uses `Kolmogorov-Smirnov test from scipy
+        <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.kstest.html>`_
+
         Parameters
         ----------
         input_data : list or np.array
@@ -114,6 +132,7 @@ class ContinuousEvaluator(ParentPredEval):
         None
 
         """
+        input_data = np.array(input_data) if isinstance(input_data, list) else input_data
         assert len(input_data) >= 25, 'Not enough data for reliable KS tests'
         self.assertion_params['ks_test'] = partial(stats.ks_2samp, np.array(input_data))
 
@@ -130,10 +149,9 @@ class ContinuousEvaluator(ParentPredEval):
         None
 
         """
-
-        if self.assertion_params['minimum'] is None:
-            assert len(input_data.shape) == 1, 'Input data not a single vector'
-            self.assertion_params['minimum'] = np.min(input_data)
+        input_data = np.array(input_data) if isinstance(input_data, list) else input_data
+        assert len(input_data.shape) == 1, 'Input data not a single vector'
+        self.assertion_params['minimum'] = np.min(input_data)
 
     def update_max(self, input_data):
         """Find max of input data.
@@ -148,9 +166,9 @@ class ContinuousEvaluator(ParentPredEval):
         None
 
         """
-        if self.assertion_params['maximum'] is None:
-            assert len(input_data.shape) == 1, 'Input data not a single vector'
-            self.assertion_params['maximum'] = np.max(input_data)
+        input_data = np.array(input_data) if isinstance(input_data, list) else input_data
+        assert len(input_data.shape) == 1, 'Input data not a single vector'
+        self.assertion_params['maximum'] = np.max(input_data)
 
     def update_mean(self, input_data):
         """Find mean of input data.
@@ -165,9 +183,9 @@ class ContinuousEvaluator(ParentPredEval):
         None
 
         """
-        if self.assertion_params['mean'] is None:
-            assert len(input_data.shape) == 1, 'Input data not a single vector'
-            self.assertion_params['mean'] = np.mean(input_data)
+        input_data = np.array(input_data) if isinstance(input_data, list) else input_data
+        assert len(input_data.shape) == 1, 'Input data not a single vector'
+        self.assertion_params['mean'] = np.mean(input_data)
 
     def update_std(self, input_data):
         """Find standard deviation of input data.
@@ -182,12 +200,14 @@ class ContinuousEvaluator(ParentPredEval):
         None
 
         """
-        if self.assertion_params['std'] is None:
-            assert len(input_data.shape) == 1, 'Input data not a single vector'
-            self.assertion_params['std'] = np.std(input_data)
+        input_data = np.array(input_data) if isinstance(input_data, list) else input_data
+        assert len(input_data.shape) == 1, 'Input data not a single vector'
+        self.assertion_params['std'] = np.std(input_data)
 
     def check_min(self, test_data):
         """Check whether test_data has any smaller values than expected.
+
+        The expected min is controlled by assertion_params['min']
 
         Parameters
         ----------
@@ -201,6 +221,7 @@ class ContinuousEvaluator(ParentPredEval):
 
         """
         assert self.assertion_params['minimum'] is not None, 'Must input or load reference minimum'
+        test_data = np.array(test_data) if isinstance(test_data, list) else test_data
         assert len(test_data.shape) == 1, 'Input data not a single vector'
         min_obs = np.min(np.array(test_data))
         passed = True if min_obs >= self.assertion_params['minimum'] else False
@@ -211,6 +232,8 @@ class ContinuousEvaluator(ParentPredEval):
 
     def check_max(self, test_data):
         """Check whether test_data has any larger values than expected.
+
+        The expected max is controlled by assertion_params['max']
 
         Parameters
         ----------
@@ -224,6 +247,7 @@ class ContinuousEvaluator(ParentPredEval):
 
         """
         assert self.assertion_params['maximum'] is not None, 'Must input or load reference maximum'
+        test_data = np.array(test_data) if isinstance(test_data, list) else test_data
         assert len(test_data.shape) == 1, 'Input data not a single vector'
         max_obs = np.max(np.array(test_data))
         passed = True if max_obs <= self.assertion_params['maximum'] else False
@@ -234,6 +258,12 @@ class ContinuousEvaluator(ParentPredEval):
 
     def check_mean(self, test_data):
         """Check whether test_data has a different mean than expected.
+
+        If the observed mean is more than 2 standard deviations from the expected mean,
+        the test fails.
+
+        The expected mean is controlled by assertion_params['mean']
+        The expected standard deviation is controlled by assertion_params['std']
 
         Parameters
         ----------
@@ -248,6 +278,7 @@ class ContinuousEvaluator(ParentPredEval):
         """
         assert self.assertion_params['mean'] is not None, 'Must input or load reference mean'
         assert self.assertion_params['std'] is not None, 'Must input or load reference mean'
+        test_data = np.array(test_data) if isinstance(test_data, list) else test_data
         assert len(test_data.shape) == 1, 'Input data not a single vector'
         mean_obs = np.mean(np.array(test_data))
 
@@ -269,6 +300,11 @@ class ContinuousEvaluator(ParentPredEval):
     def check_std(self, test_data):
         """Check whether test_data has any larger values than expected.
 
+        If the observed standard deviation is less than 1/2 the expected std or
+        greater than 1.5 times the expected std, then the test fails.
+
+        The expected standard deviation is controlled by assertion_params['std']
+
         Parameters
         ----------
         comparison_data : list or np.array, optional
@@ -281,6 +317,7 @@ class ContinuousEvaluator(ParentPredEval):
 
         """
         assert self.assertion_params['std'] is not None, 'Must input or load reference std'
+        test_data = np.array(test_data) if isinstance(test_data, list) else test_data
         assert len(test_data.shape) == 1, 'Input data not a single vector'
         std_obs = np.std(np.array(test_data))
 
@@ -302,6 +339,14 @@ class ContinuousEvaluator(ParentPredEval):
     def check_ks(self, test_data):
         """Test whether test_data is similar to reference data.
 
+        If the returned ks-test-statistic is greater than the threshold (default 0.2),
+        the test failed.
+
+        The threshold is set by assertion_params['ks_test']
+
+        Uses `Kolmogorov-Smirnov test from scipy
+        <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.kstest.html>`_
+
         Parameters
         ----------
         comparison_data : list or np.array, optional
@@ -314,6 +359,7 @@ class ContinuousEvaluator(ParentPredEval):
 
         """
         assert self.assertion_params['ks_test'], 'Must input or load reference data ks-test'
+        test_data = np.array(test_data) if isinstance(test_data, list) else test_data
         assert len(test_data.shape) == 1, 'Input data not a single vector'
         assert len(test_data) >= 25, 'Not enough data for reliable KS tests'
         test_stat, p_value = self.assertion_params['ks_test'](np.array(test_data))  # pylint: disable=E1102

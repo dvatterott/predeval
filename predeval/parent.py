@@ -52,8 +52,8 @@ class ParentPredEval(object):
         assert isinstance(verbose, bool), 'expected boolean, input verbose is not a boolean'
         self.verbose = verbose
 
-        assert len(ref_data.shape) == 1, 'Input data not a single vector'
-        self.ref_data = np.array(ref_data)
+        self.ref_data = np.array(ref_data) if isinstance(ref_data, list) else ref_data
+        assert len(self.ref_data.shape) == 1, 'Input data not a single vector'
 
     def _check_assertion_types(self, assertions):
         """Check whether test_data is as expected.

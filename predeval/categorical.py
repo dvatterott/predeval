@@ -19,6 +19,9 @@ __license__ = 'MIT'
 def _chi2_test(reference, test_data):
     """Change chi2_contingency inputs for partial evaluation.
 
+    Uses `chi2_contingency test from scipy
+    <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.chi2_contingency.html>`_
+
     Parameters
     ----------
     reference : list or np.array
@@ -46,6 +49,12 @@ class CategoricalEvaluator(ParentPredEval):
     """
     Evaluator for categorical model outputs (e.g., classification models).
 
+    By default, this will run the tests listed in the assertions
+    attribute (['chi2_test', 'exist']).
+    You can change the tests that will run by listing the desired tests in the assertions parameter.
+
+    The available tests are chi2_test and exist.
+
     ...
 
     Parameters
@@ -60,11 +69,14 @@ class CategoricalEvaluator(ParentPredEval):
     Attributes
     ----------
     assertion_params : dict
-        dictionary of test names and values defining these tests
-        (e.g., test-statistic for chi2_test).
-        Default value for chi2_test is 0.2.
+        dictionary of test names and values defining these tests.
+        * chi2_test : float
+            Chi2-test-statistic. When this value is exceeded. The test 'failed'.
+        * cat_exists : list of int or str
+            This is a list of the expected model outputs
     assertions : list of str
         This list of strings describes the tests that will be run on comparison data.
+        Defaults to ['chi2_test', 'exist']
 
     """
     def __init__(
@@ -121,6 +133,9 @@ class CategoricalEvaluator(ParentPredEval):
     def update_chi2_test(self, input_data):
         """Create partially evaluated chi2 contingency test.
 
+        Uses `chi2_contingency test from scipy
+        <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.chi2_contingency.html>`_
+
         Parameters
         ----------
         input_data : list or np.array
@@ -131,6 +146,7 @@ class CategoricalEvaluator(ParentPredEval):
         None
 
         """
+        input_data = np.array(input_data) if isinstance(input_data, list) else input_data
         assert len(input_data.shape) == 1, 'Input data not a single vector'
         _, counts = np.unique(input_data, return_counts=True)
         assert all([x >= 5 for x in counts]), \
@@ -150,15 +166,20 @@ class CategoricalEvaluator(ParentPredEval):
         None
 
         """
-        if self.assertion_params['cat_exists'] is None:
-            assert len(input_data.shape) == 1, 'Input data not a single vector'
-            self.assertion_params['cat_exists'] = np.unique(input_data)
+        input_data = np.array(input_data) if isinstance(input_data, list) else input_data
+        assert len(input_data.shape) == 1, 'Input data not a single vector'
+        self.assertion_params['cat_exists'] = np.unique(input_data)
 
     def check_chi2(self, test_data):
         """Test whether test_data is similar to reference data.
 
-        If chi2-test-statistic exceeds the value in assertion_params,
-        then the test will produce a False (rather than True).
+        If the returned chi2-test-statistic is greater than the threshold (default 2),
+        the test failed.
+
+        The threshold is set by assertion_params['chi2_test']
+
+        Uses `chi2_contingency test from scipy
+        <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.chi2_contingency.html>`_
 
         Parameters
         ----------
@@ -172,6 +193,7 @@ class CategoricalEvaluator(ParentPredEval):
 
         """
         assert self.assertion_params['chi2_test'], 'Must input or load reference data chi2-test'
+        test_data = np.array(test_data) if isinstance(test_data, list) else test_data
         assert len(test_data.shape) == 1, 'Input data not a single vector'
         _, counts = np.unique(test_data, return_counts=True)
         assert all([x >= 5 for x in counts]), \
@@ -192,6 +214,8 @@ class CategoricalEvaluator(ParentPredEval):
 
         If any values missing, then the function will return a False (rather than true).
 
+        The expected values is controlled by assertion_params['cat_exists']
+
         Parameters
         ----------
         test_data : list or np.array
@@ -204,6 +228,7 @@ class CategoricalEvaluator(ParentPredEval):
         """
         assert self.assertion_params['cat_exists'] is not None,\
             'Must input or load reference minimum'
+        test_data = np.array(test_data) if isinstance(test_data, list) else test_data
         assert len(test_data.shape) == 1, 'Input data not a single vector'
         obs = np.unique(np.array(test_data))
         exp = list(self.assertion_params['cat_exists'])
