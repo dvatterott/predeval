@@ -193,5 +193,5 @@ Here's an example of how to save and load your evaluator.
     ce = ContinuousEvaluator(model_output)
 
     from joblib import dump, load
-    dump(ce, 'con_eval.joblib')
-    ce = load('con_eval.joblib')
+    dump(ce, 'con_eval.joblib')  # save evaluator
+    ce = load('con_eval.joblib')  # load evaluator
