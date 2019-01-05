@@ -2,7 +2,9 @@
 Examples
 =====
 
-Example of using the ContinuousEvaluator::
+Example of using the ContinuousEvaluator
+
+.. code:: ipython3
 
     from predeval import ContinuousEvaluator
 
@@ -70,7 +72,9 @@ Example of using the ContinuousEvaluator::
     Passed std test.
     Failed ks test.
 
-Example of using the CategoricalEvaluator::
+Example of using the CategoricalEvaluator
+
+.. code:: ipython3
 
     from predeval import CategoricalEvaluator
 
