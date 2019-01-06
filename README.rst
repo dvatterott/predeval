@@ -26,12 +26,41 @@ predeval
 
 
 
-This software is built to identify unexpected changes in a model output before evaluation data becomes available. For example, if you create a churn model, you will have to wait X number of weeks before learning whether users churned (and can evaluate your churn model predictions). This software will not guarantee that your model is accurate, but it will alert you if your model's outputs (i.e., predictions) are dramatically different from what they have been in the past.
+This software is built to identify changes in a model output before evaluation data becomes available.
+
+For example, if you create a churn model, you will have to wait X number of weeks before learning whether users churned (and can evaluate your churn model predictions).
+
+This software will not guarantee that your model is accurate, but it will alert you if your model's outputs (i.e., predictions) are different from what they have been in the past. A model's output can pass predeval tests and be inaccurate and a model's output can fail predeval and be accurate. That said, unexpected changes in model outputs likely represent a change in accuracy.
 
 
 * Free software: MIT license
 * Documentation: https://predeval.readthedocs.io.
 
+Installation
+-------
+
+Installation is described here: https://predeval.readthedocs.io/en/latest/installation.html
+
+Example Usage
+-------
+
+Examples can be found here: https://predeval.readthedocs.io/en/latest/usage.html
+
+
+API Documentation
+-------
+
+Documentation of the software can be found here: https://predeval.readthedocs.io/en/latest/api.html
+
+Contributing
+-------
+
+Info about contributing can be found here: https://predeval.readthedocs.io/en/latest/contributing.html
+
+Changelog
+-------
+
+Changelog can be found here: https://predeval.readthedocs.io/en/latest/history.html
 
 Credits
 -------
