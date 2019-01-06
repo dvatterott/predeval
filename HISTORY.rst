@@ -11,3 +11,8 @@ History
 ------------------
 
 * Adding pypi deploy to travis.
+
+0.0.3 (2019-01-06)
+------------------
+
+* Only one travis version publishes to pypi.
