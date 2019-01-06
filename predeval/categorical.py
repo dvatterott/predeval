@@ -223,7 +223,7 @@ class CategoricalEvaluator(ParentPredEval):
             2 item tuple with test name and boolean expressing whether passed test.
         """
         assert self.assertion_params['cat_exists'] is not None,\
-            'Must input or load reference minimum'
+            'Must input or load reference categories'
         test_data = np.array(test_data) if isinstance(test_data, list) else test_data
         assert len(test_data.shape) == 1, 'Input data not a single vector'
         obs = np.unique(np.array(test_data))
@@ -231,5 +231,5 @@ class CategoricalEvaluator(ParentPredEval):
         passed = True if all([x in exp for x in obs]) and all([x in obs for x in exp]) else False
         pass_fail = 'Passed' if passed else 'Failed'
         if self.verbose:
-            print('{0} min check; observed={1} (Expected {2})'.format(pass_fail, obs, exp))
+            print('{0} exist check; observed={1} (Expected {2})'.format(pass_fail, obs, exp))
         return ('exist', passed)

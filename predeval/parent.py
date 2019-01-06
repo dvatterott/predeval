@@ -31,19 +31,19 @@ class ParentPredEval(object):
 
     @abstractproperty
     def _possible_assertions(self):
-        raise NotImplementedError
+        raise NotImplementedError  # pragma: no cover
 
     @abstractproperty
     def assertions(self):  # pylint: disable=C0111
-        raise NotImplementedError
+        raise NotImplementedError  # pragma: no cover
 
     @abstractproperty
     def assertion_params(self):  # pylint: disable=C0111
-        raise NotImplementedError
+        raise NotImplementedError  # pragma: no cover
 
     @abstractproperty
     def _tests(self):
-        raise NotImplementedError
+        raise NotImplementedError  # pragma: no cover
 
     def __init__(
             self,
@@ -56,7 +56,7 @@ class ParentPredEval(object):
         assert len(self.ref_data.shape) == 1, 'Input data not a single vector'
 
     def _check_assertion_types(self, assertions):
-        """Check whether test_data is as expected.
+        """Check whether requested assertions are as expected.
 
         Parameters
         ----------
@@ -69,7 +69,7 @@ class ParentPredEval(object):
 
         """
         assert isinstance(assertions, (str, list)), 'assertions given in unexpected type'
-        assertions = list(assertions) if isinstance(assertions, str) else assertions
+        assertions = [assertions] if isinstance(assertions, str) else assertions
         assert all([x in self._possible_assertions
                     for x in assertions]), 'unexpected assertion request'
         return assertions

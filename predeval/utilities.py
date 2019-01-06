@@ -31,4 +31,4 @@ def evaluate_tests(test_ouputs, assert_test=False, verbose=True):
             if verbose:
                 print('Failed {} test.'.format(test_name))
             if assert_test:
-                assert test_val, 'Error. Failed {} test.'
+                assert test_val, 'Error. Failed {} test.'  # pragma: no cover

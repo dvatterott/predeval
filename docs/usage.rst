@@ -68,7 +68,7 @@ Example of using the CategoricalEvaluator
 
     # create categorical sample.
     # this might typically be your model's output from a training data-set
-    from numpy.random import uniform, seed
+    from numpy.random import choice, seed
     seed(1234)
     model_output = choice([0, 1, 2], size=(1000,))
 
@@ -150,7 +150,23 @@ Example of changing Kolmogorov-Smirnov test threshold to 1.
     ce = ContinuousEvaluator(model_output)
     ce.update_param('ks_stat', 1)
 
+Example of changing Kolmogorov-Smirnov test.
+
+.. code-block:: python3
+
+    from predeval import ContinuousEvaluator
+    ce = ContinuousEvaluator(model_output)
+    ce.update_ks_test(new_model_output)
+
 Example of changing Chi-square test of independence threshold to 3.
+
+.. code-block:: python3
+
+    from predeval import CategoricalEvaluator
+    ce = CategoricalEvaluator(model_output)
+    ce.update_chi2_test(new_model_output)
+
+Example of changing Chi-square test.
 
 .. code-block:: python3
 
