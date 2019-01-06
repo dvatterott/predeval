@@ -13,8 +13,8 @@ predeval
         :target: https://predeval.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
-.. image:: https://codecov.io/gh/codecov/predeval/branch/master/graph/badge.svg
-  :target: https://codecov.io/gh/codecov/predeval
+.. image:: https://codecov.io/gh/dvatterott/predeval/branch/master/graph/badge.svg
+  :target: https://codecov.io/gh/dvatterott/predeval
 
 .. image:: https://pyup.io/repos/github/dvatterott/predeval/shield.svg
      :target: https://pyup.io/repos/github/dvatterott/predeval/
