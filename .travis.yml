@@ -10,16 +10,16 @@ matrix:
     env: TOXENV=py35
   - python: 3.6
     env: TOXENV=py36
-  # - python: pypy
-  #   env: TOXENV=pypy
   - python: 3.5
     env: TOXENV=flake8
+  - python: pypy
+    env: TOXENV=pypy
 install:
-  - pip install tox
+- pip install tox
 script: tox
 after_success:
 - pip install codecov
 - codecov -e TOXENV TRAVIS_OS_NAME
-# deploy:
-#   password:
-#     secure: e1ryoJq9qgVj0htRvzOkW8hfNw0Co8JbsdKa+6LKCbi12l9EFovwbxJZj1laYc5UxeFOT6Y8DuKLEK+Ue3iCtV2GtELoszOchGd6H4iHU1RITiADYIdGJ+HBFZ1ZEC0OzlLBN6CObPDQ/y3fESBmxq0lvGycSumxmZJKx00f/bG5Y/JqMQWTRmuIOe6PsJb5v1ar4Eu+XqNu+YAL63uZaZiiJgd9On+NW8Rj9SNdVLnjOjFwmnNft+rMVXwItFOdgxt+I4ms3w9DSJA/+/+KgTwMJO5FHE+TXk7aQHpOg5/40Rm/oC4YFbQNCYgIJRd6XBn1BGvixiuEdWm231gcUoDRI9Ja3b+ndd4DhEjY4LH2AoY6BsfgrAEBmHyJdaksVKvg8IYy7hPGoFR/Bctr2CHO14ZV/tbYUMDosXDgvI0sjkESEIZsuIidUD5uoZdFaZWfEGhGlkuU5aFDNILq7wsox106Hq3Cix4XX5dZ3TsTzzWkOyZyOgCC7XtTtQLwh7BYh+KurnbTgFw2lDSFRvQ6/hGPXRzwW8XRfs1/5o0wQRC+eA4PVbrxfhc469K49+ZOcPtcHW8jDqzLoD07igoO1I4+XczhHWBKq/4GXL530I5TNrp+xIs8U3abFMTGuRX6NxpjlA3IbMdUkB/zoLHpPorsDaJ4rQeuFQh2pwI=
+deploy:
+  password:
+    secure: Edplgu14/v2GjWCGe0NC+Jnn5oqtdbN/ydJNXVjWbqc9Qs10Y3QEF54QsKn4DFdYQD6sikX90k2mhXeH5wbRPN2RiuH2LWHvl5Dwr7wTZEIgnmoVReNo7+KsAc7l3Wqt75TJ7UH9MuBHBqkBkGEowC/Mj0rrgLgJMUIHlp329qD2UkglGRG8VkwdNDCBboSRE5fF3V2MfhtHlv1AR63gyjO7t1bchM/Rxkol0hGXFeEs1wUNC76oYpYAtearN56lGVVX44xMI04icPpwymuIpxv6Ej31hhaw9b/97IqM1p7j3R0uG4kepOYDBZ7SAMm79prmWyUdCbFR3e9QQNlgBGfD5TrZwxEA371C9sG3P2joIAgl4QVT99dU+nfSOnflSnz8KRI13bZsmdhELwX25gc4n3Y4mx+Fp8ZdCXUYiZCm+eKP3oYgPgHXnu1Tg3FG1aNRKFWIyvBQBTRIVohNjrRH+fUDozO63bwO3yfbYwN1MRLbjc+Pq7xudmoqo+J03ljMjglJLL1dihAtFOwWLIf8MyEqz9mQ0kgWZM8e1yZpB5zbE75q8MM/DTN49RokjEMvtCArCpa9hLJ4eIu4vtsjYEyex/Ypg2lmfDoFX9yY1/9GZBWo2oxpuKd6iH5h6REQ95EhVuIl5BlrXMHwS2ytKFduIlblCN7yXYKe8q8=

@@ -65,6 +65,8 @@ Changelog can be found here: https://predeval.readthedocs.io/en/latest/history.h
 Credits
 -------
 
+Info about contributors can be found here: https://predeval.readthedocs.io/en/latest/authors.html
+
 This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
 
 .. _Cookiecutter: https://github.com/audreyr/cookiecutter
