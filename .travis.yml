@@ -12,8 +12,8 @@ matrix:
     env: TOXENV=py36
   - python: 3.5
     env: TOXENV=flake8
-  - python: pypy
-    env: TOXENV=pypy
+  - python: pypy3.5
+    env: TOXENV=pypy3.5
 install:
 - pip install tox
 script: tox
