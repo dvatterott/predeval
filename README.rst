@@ -9,6 +9,10 @@ predeval
 .. image:: https://img.shields.io/travis/dvatterott/predeval.svg
         :target: https://travis-ci.org/dvatterott/predeval
 
+.. |appveyor| image:: https://ci.appveyor.com/api/projects/status/github/dvatterott/predeval?branch=master&svg=true
+    :alt: AppVeyor Build Status
+    :target: https://ci.appveyor.com/project/dvatterott/predeval
+
 .. image:: https://readthedocs.org/projects/predeval/badge/?version=latest
         :target: https://predeval.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
@@ -20,10 +24,9 @@ predeval
      :target: https://pyup.io/repos/github/dvatterott/predeval/
      :alt: Updates
 
-.. image:: https://pyup.io/repos/github/dvatterott/predeval/python-3-shield.svg
-    :target: https://pyup.io/repos/github/dvatterott/predeval/
-    :alt: Python 3
-
+.. |supported-versions| image:: https://img.shields.io/pypi/pyversions/predeval.svg
+   :alt: Supported versions
+   :target: https://pypi.python.org/pypi/predeval
 
 
 This software is built to identify changes in a model output before evaluation data becomes available.

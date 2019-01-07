@@ -69,9 +69,9 @@ class ContinuousEvaluator(ParentPredEval):
             'ks_test': None
         }
 
-        assert isinstance(kwargs.get('ks_stat', 0.2),
+        assert isinstance(kwargs.get('ks_stat', 0.5),
                           Real), 'expected number, input ks_test_stat is not a number'
-        self._assertion_params_['ks_stat'] = kwargs.get('ks_stat', 0.2)
+        self._assertion_params_['ks_stat'] = kwargs.get('ks_stat', 0.5)
 
         # ---- create list of assertions to test ---- #
         self._possible_assertions_ = {

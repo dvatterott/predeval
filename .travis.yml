@@ -1,3 +1,6 @@
+branches:
+  only:
+  - master
 sudo: false
 language: python
 matrix:
@@ -13,7 +16,28 @@ matrix:
   - python: 3.5
     env: TOXENV=flake8
 install:
-- pip install tox
+  - pip install tox
+  - |
+    set -ex
+    if [[ $TRAVIS_PYTHON_VERSION == 'pypy' ]]; then
+        (cd $HOME
+         wget https://bitbucket.org/pypy/pypy/downloads/pypy2-v6.0.0-linux64.tar.bz2
+         tar xf pypy2-*.tar.bz2
+         pypy2-*/bin/pypy -m ensurepip
+         pypy2-*/bin/pypy -m pip install -U virtualenv)
+        export PATH=$(echo $HOME/pypy2-*/bin):$PATH
+        export TOXPYTHON=$(echo $HOME/pypy2-*/bin/pypy)
+    fi
+    if [[ $TRAVIS_PYTHON_VERSION == 'pypy3' ]]; then
+        (cd $HOME
+         wget https://bitbucket.org/pypy/pypy/downloads/pypy3-v6.0.0-linux64.tar.bz2
+         tar xf pypy3-*.tar.bz2
+         pypy3-*/bin/pypy3 -m ensurepip
+         pypy3-*/bin/pypy3 -m pip install -U virtualenv)
+        export PATH=$(echo $HOME/pypy3-*/bin):$PATH
+        export TOXPYTHON=$(echo $HOME/pypy3-*/bin/pypy3)
+    fi
+    set +x
 script: tox
 after_success:
 - pip install codecov
@@ -22,6 +46,8 @@ deploy:
   provider: pypi
   distributions: sdist bdist_wheel
   skip_existing: true
+  on:
+    branch: master
   user: "dvatterott"
   password:
     secure: Edplgu14/v2GjWCGe0NC+Jnn5oqtdbN/ydJNXVjWbqc9Qs10Y3QEF54QsKn4DFdYQD6sikX90k2mhXeH5wbRPN2RiuH2LWHvl5Dwr7wTZEIgnmoVReNo7+KsAc7l3Wqt75TJ7UH9MuBHBqkBkGEowC/Mj0rrgLgJMUIHlp329qD2UkglGRG8VkwdNDCBboSRE5fF3V2MfhtHlv1AR63gyjO7t1bchM/Rxkol0hGXFeEs1wUNC76oYpYAtearN56lGVVX44xMI04icPpwymuIpxv6Ej31hhaw9b/97IqM1p7j3R0uG4kepOYDBZ7SAMm79prmWyUdCbFR3e9QQNlgBGfD5TrZwxEA371C9sG3P2joIAgl4QVT99dU+nfSOnflSnz8KRI13bZsmdhELwX25gc4n3Y4mx+Fp8ZdCXUYiZCm+eKP3oYgPgHXnu1Tg3FG1aNRKFWIyvBQBTRIVohNjrRH+fUDozO63bwO3yfbYwN1MRLbjc+Pq7xudmoqo+J03ljMjglJLL1dihAtFOwWLIf8MyEqz9mQ0kgWZM8e1yZpB5zbE75q8MM/DTN49RokjEMvtCArCpa9hLJ4eIu4vtsjYEyex/Ypg2lmfDoFX9yY1/9GZBWo2oxpuKd6iH5h6REQ95EhVuIl5BlrXMHwS2ytKFduIlblCN7yXYKe8q8=

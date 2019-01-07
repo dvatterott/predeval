@@ -85,8 +85,8 @@ class CategoricalEvaluator(ParentPredEval):
 
         # ---- Fill in Assertion Parameters ---- #
         self._assertion_params_ = {
-            'chi2_test': None,
             'cat_exists': None,
+            'chi2_test': None,
         }
 
         assert isinstance(kwargs.get('chi2_stat', 2),
@@ -95,12 +95,12 @@ class CategoricalEvaluator(ParentPredEval):
 
         # ---- create list of assertions to test ---- #
         self._possible_assertions_ = {
-            'chi2_test': (self.update_chi2_test, self.check_chi2),
             'exist': (self.update_exist, self.check_exist),
+            'chi2_test': (self.update_chi2_test, self.check_chi2),
         }
 
         # ---- create list of assertions to test ---- #
-        assertions = ['chi2_test', 'exist'] if assertions is None else assertions
+        assertions = ['exist', 'chi2_test'] if assertions is None else assertions
         self._assertions_ = self._check_assertion_types(assertions)
 
         # ---- populate assertion tests with reference data ---- #

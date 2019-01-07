@@ -41,16 +41,16 @@ class TestContinuous(object):
 
     def test_kstest_param(self):
         """Assert that correctly setting ks_stat."""
-        assert self.con_eval.assertion_params['ks_stat'] == 0.2
+        assert self.con_eval.assertion_params['ks_stat'] == 0.5
 
     def test_kstest(self, capsys):
         """Assert that check_ks correct."""
         self.con_eval.check_ks(np.array([x for x in range(31)]))
         captured = capsys.readouterr()
         assert captured.out == "Passed ks check; test statistic=0.0000, p=1.0000\n"
-        self.con_eval.check_ks(np.array([x for x in range(51)]))
+        self.con_eval.check_ks(np.array([x for x in range(20, 51)]))
         captured = capsys.readouterr()
-        assert captured.out == "Failed ks check; test statistic=0.3922, p=0.0036\n"
+        assert captured.out == "Failed ks check; test statistic=0.6452, p=0.0000\n"
 
     def test_checkmin(self, capsys):
         """Assert that check_min correct."""
@@ -90,10 +90,10 @@ class TestContinuous(object):
 
     def test_update_ks_test(self, capsys):
         """Assert that correctly updating ks_test."""
-        self.con_eval.update_ks_test(np.array([x for x in range(51)]))
+        self.con_eval.update_ks_test(np.array([x for x in range(20, 51)]))
         self.con_eval.check_ks(np.array([x for x in range(31)]))
         captured = capsys.readouterr()
-        assert captured.out == "Failed ks check; test statistic=0.3922, p=0.0036\n"
+        assert captured.out == "Failed ks check; test statistic=0.6452, p=0.0000\n"
 
     def test_update_min(self):
         """Assert that correctly updating min."""
@@ -117,6 +117,7 @@ class TestContinuous(object):
 
     def test_check_data(self, capsys):
         """Assert that correctly using check_data."""
+        self.con_eval.update_ks_test(np.array([x for x in range(51)]))
         self.con_eval.check_data(np.array([x for x in range(51)]))
         captured = capsys.readouterr()
         expect_out = ("Passed min check; min observed=0.0000\n"
@@ -223,8 +224,8 @@ class TestCategorical(object):
         self.con_eval = CategoricalEvaluator(new_out)
         self.con_eval.check_data(new_out)
         captured = capsys.readouterr()
-        expect_out = ("Passed chi2 check; test statistic=0.0000, p=1.0000\n"
-                      "Passed exist check; observed=[0 1 2] (Expected [0, 1, 2])\n")
+        expect_out = ("Passed exist check; observed=[0 1 2] (Expected [0, 1, 2])\n"
+                      "Passed chi2 check; test statistic=0.0000, p=1.0000\n")
         assert captured.out == expect_out
 
 
@@ -241,8 +242,8 @@ class TestUtilities(object):
         output = self.con_eval.check_data(new_out)
         evaluate_tests(output)
         captured = capsys.readouterr()
-        expect_out = ("Passed chi2 test.\n"
-                      "Passed exist test.\n")
+        expect_out = ("Passed exist test.\n"
+                      "Passed chi2 test.\n")
         assert captured.out == expect_out
 
     def test_eval_tests_fail(self, capsys):
@@ -253,8 +254,8 @@ class TestUtilities(object):
         output = self.con_eval.check_data(new_out)
         evaluate_tests(output)
         captured = capsys.readouterr()
-        expect_out = ("Failed chi2 test.\n"
-                      "Passed exist test.\n")
+        expect_out = ("Passed exist test.\n"
+                      "Failed chi2 test.\n")
         assert captured.out == expect_out
 
     def test_eval_tests_noprint(self, capsys):
