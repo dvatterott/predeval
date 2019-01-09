@@ -2,7 +2,7 @@
 Examples
 =====
 
-Jupyter notebookes with examples using using sci-kit learn can be found here: https://github.com/dvatterott/predeval/tree/master/example_notebooks
+Jupyter notebookes with examples using using scikit-learn can be found here: https://github.com/dvatterott/predeval/tree/master/example_notebooks
 
 ContinuousEvaluator
 ========
