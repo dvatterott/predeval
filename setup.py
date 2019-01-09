@@ -48,6 +48,6 @@ setup(
     test_suite='tests',
     tests_require=TEST_REQUIREMENTS,
     url='https://github.com/dvatterott/predeval',
-    version='0.0.4',
+    version='0.0.5',
     zip_safe=False,
 )

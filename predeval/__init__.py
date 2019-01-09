@@ -4,7 +4,7 @@
 
 __author__ = """Dan Vatterott"""
 __email__ = 'dvatterott@gmail.com'
-__version__ = '0.0.4'
+__version__ = '0.0.5'
 
 from .continuous import ContinuousEvaluator
 from .categorical import CategoricalEvaluator

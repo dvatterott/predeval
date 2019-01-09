@@ -195,7 +195,12 @@ class CategoricalEvaluator(ParentPredEval):
         assert all([x >= 5 for x in counts]), \
             'Not enough data of each type for reliable Chi2 Contingency test. '\
             'Need at least 5 values in each cell.'
-        test_stat, p_value, _, _ = self.assertion_params['chi2_test'](counts)  # pylint: disable=E1102
+        try:
+            test_stat, p_value, _, _ = self.assertion_params['chi2_test'](counts)  # pylint: disable=E1102
+        except ValueError:
+            test_stat = 1000.0
+            p_value = 0.00
+            print('WARNING: NOT ALL CATEGORIES PRESENT')
         passed = True if test_stat <= self.assertion_params['chi2_stat'] else False
         pass_fail = 'Passed' if passed else 'Failed'
         if self.verbose:
