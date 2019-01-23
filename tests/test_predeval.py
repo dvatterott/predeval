@@ -184,6 +184,15 @@ class TestCategorical(object):
         captured = capsys.readouterr()
         assert captured.out == "Failed chi2 check; test statistic=19.3562, p=0.0001\n"
 
+    def test_chi2short(self, capsys):
+        """Assert that check_chi2 correct."""
+        seed(1234)
+        new_out = choice([0, 1], size=(100,))
+        self.con_eval.check_chi2(new_out)
+        captured = capsys.readouterr()
+        assert captured.out == ("WARNING: NOT ALL CATEGORIES PRESENT\n"
+                                "Failed chi2 check; test statistic=1000.0000, p=0.0000\n")
+
     def test_checkexist(self, capsys):
         """Assert that check_exist correct."""
         self.con_eval.check_exist([0, 1, 2])
