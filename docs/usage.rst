@@ -11,7 +11,7 @@ Example of using the ContinuousEvaluator
 
 .. code-block:: python3
 
-    from predeval import ContinuousEvaluator
+    from predeval import ContinuousEvaluator, evaluate_tests
 
     # create continuous sample.
     # this might typically be your model's output from a training data-set
@@ -66,7 +66,7 @@ Example of using the CategoricalEvaluator
 
 .. code-block:: python3
 
-    from predeval import CategoricalEvaluator
+    from predeval import CategoricalEvaluator, evaluate_tests
 
     # create categorical sample.
     # this might typically be your model's output from a training data-set
@@ -203,7 +203,7 @@ You might not want to run the entire test suite. Here's some examples of how to 
 Saving and Loading your evaluator
 ========
 
-Here's an example of how to save and load your evaluator.
+Here's an example of how to save and load your evaluator in python3 (remember to import your evaluator before loading the object).
 
 .. code-block:: python3
 
@@ -213,3 +213,20 @@ Here's an example of how to save and load your evaluator.
     from joblib import dump, load
     dump(ce, 'con_eval.joblib')  # save evaluator
     ce = load('con_eval.joblib')  # load evaluator
+
+Here's an example of how to save and load your evaluator in python2 (remember to import your evaluator before loading the object).
+
+.. code-block:: python2
+
+    from predeval import ContinuousEvaluator
+    ce = ContinuousEvaluator(model_output)
+
+    import cloudpickle
+
+    # save evaluator
+    with open('con_eval.pkl', 'wb') as f:
+        cloudpickle.dump(ce, f)
+
+    # load evaluator
+    with open('con_eval.pkl', 'rb') as f:
+        ce = cloudpickle.load(f)
