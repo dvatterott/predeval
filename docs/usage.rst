@@ -216,7 +216,7 @@ Here's an example of how to save and load your evaluator in python3 (remember to
 
 Here's an example of how to save and load your evaluator in python2 (remember to import your evaluator before loading the object).
 
-.. code-block:: python2
+.. code-block:: python3
 
     from predeval import ContinuousEvaluator
     ce = ContinuousEvaluator(model_output)
