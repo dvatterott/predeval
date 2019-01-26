@@ -11,7 +11,7 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     HISTORY = history_file.read()
 
-REQUIREMENTS = ['numpy>=1.9.0', 'scipy>=1.0.0', 'joblib>=0.9.2']
+REQUIREMENTS = ['numpy>=1.9.0', 'scipy>=1.0.0', 'joblib>=0.9.2', 'cloudpickle']
 
 SETUP_REQUIREMENTS = ['pytest-runner', ]
 
