@@ -40,28 +40,28 @@ This software will not guarantee that your model is accurate, but it will alert 
 * Documentation: https://predeval.readthedocs.io.
 
 Installation
--------
+------------
 
 Installation is described here: https://predeval.readthedocs.io/en/latest/installation.html
 
 Example Usage
--------
+-------------
 
 Examples can be found here: https://predeval.readthedocs.io/en/latest/usage.html
 
 
 API Documentation
--------
+-----------------
 
 Documentation of the software can be found here: https://predeval.readthedocs.io/en/latest/api.html
 
 Contributing
--------
+------------
 
 Info about contributing can be found here: https://predeval.readthedocs.io/en/latest/contributing.html
 
 Changelog
--------
+---------
 
 Changelog can be found here: https://predeval.readthedocs.io/en/latest/history.html
 
