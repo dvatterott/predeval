@@ -11,7 +11,7 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     HISTORY = history_file.read()
 
-REQUIREMENTS = ['numpy>=1.9.0', 'scipy>=1.0.0', 'joblib>=0.9.2', 'cloudpickle']
+REQUIREMENTS = ['numpy>=1.11.1', 'scipy>=1.0.0', 'joblib>=0.9.2', 'cloudpickle']
 
 SETUP_REQUIREMENTS = ['pytest-runner', ]
 
@@ -26,10 +26,7 @@ setup(
         'Intended Audience :: Science/Research',
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
-        "Programming Language :: Python :: 2",
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
@@ -48,6 +45,6 @@ setup(
     test_suite='tests',
     tests_require=TEST_REQUIREMENTS,
     url='https://github.com/dvatterott/predeval',
-    version='0.0.8',
+    version='0.0.9',
     zip_safe=False,
 )

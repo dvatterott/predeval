@@ -7,8 +7,6 @@ cache:
   - '%LOCALAPPDATA%\pip\Cache'
 environment:
   matrix:
-    - TOXENV: 'py27'
-    - TOXENV: 'py34'
     - TOXENV: 'py35'
     - TOXENV: 'py36'
 
